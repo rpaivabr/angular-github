@@ -13,9 +13,8 @@ jobs:
           node-version: '12.x'
       - run: npm install
       - run: npm run build:prod
-      - name: Publish generated content to GitHub Pages
-        uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
+      - uses: w9jds/firebase-action@master
         with:
-            dir: dist/angular-github
-            branch: gh-pages
-            token: ${{ secrets.ACCESS_TOKEN }}
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
